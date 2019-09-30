@@ -9,7 +9,7 @@ import {
 	Linking,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
-
+import {CirclesLoader, PulseLoader, TextLoader, DotsLoader } from 'react-native-indicator';
 import { useNavigation } from 'react-navigation-hooks';
 
 export default function SermonsScreen() {
@@ -20,6 +20,7 @@ export default function SermonsScreen() {
 	const fetchData = () => {
 		setLoading(true);
 		fetch("https://stephen-api.azurewebsites.net/api/playlists?channelId=UCtcwkfeJL45qwR4MEJSHhYw")
+		// fetch("https://stephen-api.azurewebsites.net/api/playlists?channelId=UCvjyizps9SGzi8nqvW3diuQ")
 			.then(response => response.json())
 			.then(responseJson => {
 				 const items = responseJson.map(playlist => {
@@ -61,6 +62,7 @@ export default function SermonsScreen() {
             source={require('../assets/images/sunday.png')}
             style={styles.welcomeImage}
           />
+					{ loading && <CirclesLoader size={80} dotRadius={16} color='yellow'/> }
         </View>
 				<SafeAreaView style={styles.container}>
 		      <FlatList

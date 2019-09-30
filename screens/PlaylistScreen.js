@@ -11,6 +11,7 @@ import {
 	Alert,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import {CirclesLoader, PulseLoader, TextLoader, DotsLoader } from 'react-native-indicator';
 
 export default function PlaylistScreen(screenProps) {
 	const [loading, setLoading] = useState(false);
@@ -64,6 +65,7 @@ export default function PlaylistScreen(screenProps) {
 	          style={styles.welcomeImage}
 						source={{uri: thumbnailUrl}}
 	        />
+					{ loading && <CirclesLoader size={80} dotRadius={16} color='yellow'/> }
         </View>
 				<SafeAreaView style={styles.container}>
 		      <FlatList

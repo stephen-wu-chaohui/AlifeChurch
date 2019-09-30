@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SermonsScreen from '../screens/SermonsScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
 import GroupsScreen from '../screens/GroupsScreen';
+import AlbumsScreen from '../screens/AlbumsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -37,6 +38,8 @@ const SermonsStack = createStackNavigator(
   {
 		Home: {screen: SermonsScreen},
 		PlaylistScreen: {screen: PlaylistScreen},
+		AlbumsScreen: {screen: AlbumsScreen},
+		// PostsScreen: {screen: PostsScreen},
   },
   config
 );
