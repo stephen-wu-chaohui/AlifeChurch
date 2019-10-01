@@ -29,15 +29,15 @@ export default function GroupsScreen() {
       //   '928520814190174',
       //   { permissions: ['public_profile'] }
 			// );
-			const stephen = '2447699405508810';
+			const userId = '2447699405508810';
 			if (type === "success") {
 				facebookToken = token;
-				const url = `https://graph.facebook.com/v4.0/${stephen}/groups?access_token=${token}&fields=name,privacy,owner,id,icon,cover&format=json&method=get&pretty=0&suppress_http_code=1&transport=cors`;
+				const url = `https://graph.facebook.com/v4.0/${userId}/groups?access_token=${token}&fields=name,privacy,owner,id,icon,cover&format=json&method=get&pretty=0&suppress_http_code=1&transport=cors`;
 				fetch(url)
 					.then(response => response.json())
 					.then(responseJson => {
 						 const items = responseJson.data
-						 .filter(group => group.privacy === "CLOSED" && group.owner && group.owner.id === stephen)
+						 .filter(group => group.privacy === "CLOSED" && group.owner && group.owner.id === userId)
 						 .map(group => {
 							 group.isSelect = false;
 							 group.selectedClass = styles.list;
@@ -65,7 +65,6 @@ export default function GroupsScreen() {
 	const renderItem = data => (
     <ListItem
 			onPress={() => {
-				// Linking.openURL(`fb://profile/${data.item.id}?ref=share`);
 				data.item.token = this.facebookToken;
 				data.item.coversource = data.item.cover.source;
 				navigate('AlbumsScreen', data.item);

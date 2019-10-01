@@ -38,8 +38,6 @@ const SermonsStack = createStackNavigator(
   {
 		Home: {screen: SermonsScreen},
 		PlaylistScreen: {screen: PlaylistScreen},
-		AlbumsScreen: {screen: AlbumsScreen},
-		// PostsScreen: {screen: PostsScreen},
   },
   config
 );
@@ -57,6 +55,8 @@ SermonsStack.path = '';
 const GroupsStack = createStackNavigator(
   {
     Groups: GroupsScreen,
+		AlbumsScreen: {screen: AlbumsScreen},
+		// PostsScreen: {screen: PostsScreen},
   },
   config
 );
