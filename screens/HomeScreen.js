@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   Image,
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   titleContainer: {
-    alignItems: 'left',
+    alignItems: 'flex-start',
     marginHorizontal: 10,
   },
   titleText: {
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
 	},
 	manifestoContainer: {
 		alignSelf: 'stretch',
-    alignItems: 'left',
+    alignItems: 'flex-start',
 		marginHorizontal: 40,
 		paddingTop: 30,
 	},

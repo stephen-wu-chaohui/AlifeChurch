@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from 'react-navigation-hooks';
 import {
   Image,
   ScrollView,
@@ -8,17 +7,15 @@ import {
 	View,
 	FlatList,
 	Linking,
-	Alert,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import {CirclesLoader, PulseLoader, TextLoader, DotsLoader } from 'react-native-indicator';
+import {CirclesLoader } from 'react-native-indicator';
 
 export default function PlaylistScreen(screenProps) {
 	const [loading, setLoading] = useState(false);
 	const [dataSource, setDataSource] = useState([]);
 	const id = screenProps.navigation.getParam("id");
 	let thumbnailUrl = screenProps.navigation.getParam("thumbnailUrl")
-	// Alert.alert(thumbnailUrl);
 
 	const fetchData = () => {
 		setLoading(true);
@@ -32,7 +29,7 @@ export default function PlaylistScreen(screenProps) {
 				 });
 				 setLoading(false);
 				 setDataSource(items);
-			}).catch(error => {
+			}).catch(() => {
 				this.setLoading(false);
 		});
 	};
@@ -90,7 +87,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
 	},
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginTop: 0,
     marginBottom: 0,
   },
