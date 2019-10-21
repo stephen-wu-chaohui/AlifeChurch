@@ -4,44 +4,59 @@ import {
   ScrollView,
   View,
   StyleSheet,
+  Alert,
   SafeAreaView,
   FlatList,
   Linking,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { CirclesLoader } from 'react-native-indicator';
-import { useNavigation } from "react-navigation-hooks";
+import {CirclesLoader } from 'react-native-indicator';
 
-export default function AlbumsScreen(screenProps) {
+export default function FacebookAlbumsScreen(screenProps) {
   const [loading, setLoading] = useState(false);
   const [dataSource, setDataSource] = useState([]);
-  const coversource = screenProps.navigation.getParam("image");
-  const albums = screenProps.navigation.getParam("albums");
-	const { navigate } = useNavigation();
+  const source = screenProps.navigation.getParam("coversource");
+
+  const fetchData = async () => {
+    const token = 'EAANMfBlL3l4BAJZApetRfdcsAePxvLJfSjZAQabVPcPIWt21S5qtpAGuRvRdZBDRjZCJbqOqwPTq3ZC4atvgRC85Q2vSRwjhZAD0MV4uS9WHWnykZB2oAIaDfdzQNXi5mUtrrCa9bZAxmZCFQEieCgqtUZB4FOKK6QwIsmW1beVHg2SndqJ7buZBdJ4ZBtNjpXit5yxZAZCK0iYqkmKAbZChq0OqbSf'
+
+    setLoading(true);
+    const groupId = screenProps.navigation.getParam("id");
+    fetch(`https://graph.facebook.com/v4.0/${groupId}/albums?access_token=${token}&fields=name,id`)
+      .then(response => response.json())
+      .then(responseJson => {
+         const items = responseJson.data
+         .map(album => {
+           album.isSelect = false;
+           album.selectedClass = styles.list;
+           album.picture = album.photos && album.photos.length > 0 ? album.photos[0].picture : null;
+           return album;
+         });
+         setLoading(false);
+         setDataSource(items);
+      }).catch(error => {
+        this.setLoading(false);
+    });
+  };
 
   const renderItem = data => (
     <ListItem
       onPress={() => {
-				navigate("PostsScreen", data.item);
+        Linking.openURL(`https://www.facebook.com/media/set/?set=a.${data.item.id}`);
       }}
       key={data.item.id}
-			leftAvatar={{
-				source: { uri: data.item.image },
-				rounded: false
-			}}
-			title={data.item.name}
+      title={data.item.name}
       bottomDivider
       chevron
     />
   );
 
   useEffect(() => {
-		setDataSource(albums);
-		setLoading(false)
-	}, []);
+    fetchData();
+  }, []);
 
 
-  return (
+    return (
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
@@ -49,7 +64,7 @@ export default function AlbumsScreen(screenProps) {
         <View style={styles.welcomeContainer}>
           <Image
             style={styles.welcomeImage}
-            source={{uri: coversource}}
+            source={{uri: source}}
           />
           { loading && <CirclesLoader size={80} dotRadius={16} color='yellow'/> }
         </View>
@@ -62,12 +77,12 @@ export default function AlbumsScreen(screenProps) {
         </SafeAreaView>
       </ScrollView>
     </View>
-  );
+    );
 }
 
-AlbumsScreen.navigationOptions = screenProps => ({
-  title: screenProps.navigation.getParam('name')
-});
+FacebookAlbumsScreen.navigationOptions = {
+  title: 'Albums',
+};
 
 
 const styles = StyleSheet.create({

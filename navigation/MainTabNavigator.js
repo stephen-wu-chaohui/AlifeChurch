@@ -5,10 +5,13 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import CellGroupsScreen from '../screens/CellGroupsScreen';
+import AlbumsScreen from '../screens/AlbumsScreen';
+import PostsScreen from '../screens/PostsScreen';
 import SermonsScreen from '../screens/SermonsScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
-import GroupsScreen from '../screens/GroupsScreen';
-import AlbumsScreen from '../screens/AlbumsScreen';
+import FacebookGroupsScreen from '../screens/FacebookGroupsScreen';
+import FacebookAlbumsScreen from '../screens/FacebookAlbumsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -36,7 +39,7 @@ HomeStack.path = '';
 // SermonsStack
 const SermonsStack = createStackNavigator(
   {
-		Home: {screen: SermonsScreen},
+		Home: { screen: SermonsScreen},
 		PlaylistScreen: {screen: PlaylistScreen},
   },
   config
@@ -51,24 +54,42 @@ SermonsStack.navigationOptions = {
 
 SermonsStack.path = '';
 
-// GroupsStack
-const GroupsStack = createStackNavigator(
+// facebookGroupsStack
+const FacebookGroupsStack = createStackNavigator(
   {
-    Groups: GroupsScreen,
-		AlbumsScreen: {screen: AlbumsScreen},
-		// PostsScreen: {screen: PostsScreen},
+    FaceBookGroups: FacebookGroupsScreen,
+		AlbumsScreen: {screen: FacebookAlbumsScreen},
   },
   config
 );
 
-GroupsStack.navigationOptions = {
-  tabBarLabel: 'Groups',
+FacebookGroupsStack.navigationOptions = {
+  tabBarLabel: 'Facebook',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} image={require('../assets/images/group.png')} />
   ),
 };
 
-GroupsStack.path = '';
+FacebookGroupsStack.path = '';
+
+// cellGroupsStack
+const CellGroupsStack = createStackNavigator(
+  {
+		CellGroups: CellGroupsScreen,
+		AlbumsScreen: {screen: AlbumsScreen},
+		PostsScreen: {screen: PostsScreen}
+  },
+  config
+);
+
+CellGroupsStack.navigationOptions = {
+  tabBarLabel: 'My Groups',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} image={require('../assets/images/surfing.png')} />
+  ),
+};
+
+CellGroupsStack.path = '';
 
 //SettingsStack
 const SettingsStack = createStackNavigator(
@@ -90,8 +111,7 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   SermonsStack,
-  GroupsStack,
-  SettingsStack,
+	CellGroupsStack
 });
 
 tabNavigator.path = '';

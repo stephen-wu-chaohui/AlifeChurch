@@ -7,11 +7,11 @@ import {
   View,
 } from 'react-native';
 
-export default function HomeScreen() {
-	const Manifesto = "to bring people to Jesus\nand membership in his family.\n\n" +
-	"develop them Christlike maturity\nand equip them for their ministry in the church\n\n" +
-	"and life mission in the world,\nin order to manify God's name.";
+const Manifesto = "to bring people to Jesus\nand membership in his family.\n\n" +
+"develop them Christlike maturity\nand equip them for their ministry in the church\n\n" +
+"and life mission in the world,\nin order to manify God's name.";
 
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -23,7 +23,6 @@ export default function HomeScreen() {
             style={styles.welcomeImage}
           />
         </View>
-
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Chinese Abundant Life Church</Text>
         </View>

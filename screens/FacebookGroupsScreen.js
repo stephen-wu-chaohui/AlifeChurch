@@ -12,7 +12,7 @@ import { ListItem } from "react-native-elements";
 import { CirclesLoader } from "react-native-indicator";
 import { useNavigation } from "react-navigation-hooks";
 
-export default function GroupsScreen() {
+export default function FacebookGroupsScreen() {
 	const [loading, setLoading] = useState(false);
 	const [dataSource, setDataSource] = useState([]);
 	const { navigate } = useNavigation();
@@ -80,7 +80,7 @@ export default function GroupsScreen() {
 			>
 				<View style={styles.welcomeContainer}>
 					<Image
-						source={require("../assets/images/groups.png")}
+						source={require("../assets/images/facebookGroups.jpg")}
 						style={styles.welcomeImage}
 					/>
 					{loading && (
@@ -103,8 +103,8 @@ export default function GroupsScreen() {
 	);
 }
 
-GroupsScreen.navigationOptions = {
-	title: "Groups"
+FacebookGroupsScreen.navigationOptions = {
+	title: "Facebook Groups"
 };
 
 const styles = StyleSheet.create({
